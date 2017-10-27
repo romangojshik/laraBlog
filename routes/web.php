@@ -29,10 +29,12 @@ Route::group(['middleware' => 'auth'], function () {
         \Auth::logout();
         return redirect(route('login'));
     })->name('logout');
+
     Route::get('/my/account', 'AccountController@index')->name('account');
 
     //admin
     Route::group(['middleware' => 'admin'], function () {
         Route::get('/admin', 'Admin\AccountController@index')->name('admin');
     });
+    Route::resource('/admin/admin-panel', 'DashPosts');
 });
