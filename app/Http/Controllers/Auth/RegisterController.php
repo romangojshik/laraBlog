@@ -49,25 +49,23 @@ class RegisterController extends Controller
         try {
             $this->validator($request->all())->validate();
         } catch (\Exception $e) {
-            dd("Errors Roman!");
+            dd("Errors");
         }
 
         $email = $request->input('email');
         $password = $request->input('password');
-        $isAuth = $request->has('remember') ? true : false;
+        //$isAuth = $request->has('remember') ? true : false;
         $objUser = $this->create(['email' => $email, 'password' => $password]);
 
         if(!($objUser instanceof User)) {
             return back()->with('error', "Can't create object");
         }
 
-        if($isAuth) {
-            $this->guard()->login($objUser);
-        }
+//        if($isAuth) {
+//            $this->guard()->login($objUser);
+//        }
 
         return redirect(route('account'))->with('success', 'You successful register');
-        //return $this->registered($request, $user)
-            //?: redirect($this->redirectPath());
     }
 
     /**

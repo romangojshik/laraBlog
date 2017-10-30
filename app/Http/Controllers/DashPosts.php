@@ -57,9 +57,13 @@ class DashPosts extends Controller
      */
     public function show($id)
     {
-        $post = Posts::find($id);
+//        $post = Posts::find($id);
+//
+//        return view('admin.pages.show')->withPost($post);
 
-        return view('admin.pages.show')->withPost($post);
+        $post = Posts::orderby('created_at', 'asc')->paginate(5);
+
+        return view('admin.pages.index')->withPost($post);
     }
 
     /**
